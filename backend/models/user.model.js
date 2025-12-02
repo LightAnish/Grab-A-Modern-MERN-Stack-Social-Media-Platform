@@ -34,13 +34,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       select: false,
       trim: true,
-      minlength: 8,
+      minlength: 6,
     },
-    role: {
-      type: String,
-      required: true,
-      default: "user",
-    },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -65,13 +66,37 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    isVarified: {
+    isVarifiedAccount: {
       type: Boolean,
       default: false,
     },
     profileAvatar: {
       type: String,
       default: "",
+    },
+    story: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Story",
+        default: [],
+      },
+    ],
+    loops: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Loop",
+        default: [],
+      },
+    ],
+    resetOtp: {
+      type: String,
+    },
+    otpExpiry: {
+      type: Date,
+    },
+    isOtpVerified: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

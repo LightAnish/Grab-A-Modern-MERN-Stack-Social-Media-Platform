@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema(
+const storySchema = new mongoose.Schema(
   {
     author: {
       type: mongoose.Schema.Types.ObjectId,
@@ -9,11 +9,6 @@ const postSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: true,
-    },
-    caption: {
-      type: String,
-      required: true,
     },
     mediaType: {
       type: String,
@@ -35,10 +30,15 @@ const postSchema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        expires: "24h",
+    }
   },
   { timestamps: true }
 );
 
-const Post = mongoose.model("Post", postSchema);
+const Story = mongoose.model("Story", storySchema);
 
-export default Post;
+export default Story;
